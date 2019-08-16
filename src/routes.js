@@ -1,12 +1,3 @@
-import React from 'react';
-import ProblemList from 'Problem/ProblemList';
+import ProblemRoutes from 'Problem/routes';
 
-const routes = [
-  {
-    path: '/',
-    exact: true,
-    main: () => <ProblemList />,
-  },
-];
-
-export default routes;
+export default [...ProblemRoutes];
