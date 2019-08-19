@@ -1,3 +1,4 @@
-import ProblemRoutes from 'Problem/routes';
+import ProblemIndexRoute from 'Problem/Index/ProblemIndexRoute';
+import ProblemDetailsRoute from 'Problem/Details/ProblemDetailsRoute';
 
-export default [...ProblemRoutes];
+export default [ProblemIndexRoute, ProblemDetailsRoute];
