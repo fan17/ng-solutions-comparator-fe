@@ -10,13 +10,8 @@ const ProblemIndexPage = ({ loading, problems }) => (
     {loading
       ? 'loading...'
       : problems.map(({ id, title, description }) => (
-          <div style={{ marginBottom: '2rem' }}>
-            <ProblemListItem
-              key={id}
-              id={id}
-              title={title}
-              description={description}
-            />
+          <div key={id} style={{ marginBottom: '2rem' }}>
+            <ProblemListItem id={id} title={title} description={description} />
           </div>
         ))}
   </Page>

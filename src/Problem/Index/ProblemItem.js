@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import paths from 'Problem/paths';
+import { getPath } from 'Problem/Details/ProblemDetailsRoute';
 
 const ProblemListItem = ({ id, title, description }) => (
   <Card>
     <Card.Header>{title}</Card.Header>
     <Card.Body>
       <Card.Text>{description}</Card.Text>
-      <Link to={paths.details(id)}>
+      <Link to={getPath(id)}>
         <Button variant="primary">Go to details</Button>
       </Link>
     </Card.Body>

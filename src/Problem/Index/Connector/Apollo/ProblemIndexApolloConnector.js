@@ -4,7 +4,8 @@ import ProblemIndexQuery from './ProblemIndexQuery';
 
 const ProblemIndexApolloConnector = ({ children }) => {
   const { data, loading } = useQuery(ProblemIndexQuery);
-  return children({ loading, problems: data.problems });
+
+  return children({ loading, problems: data.problems || [] });
 };
 
 ProblemIndexApolloConnector.propTypes = {

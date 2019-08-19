@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from 'react-bootstrap/es/Container';
+import Container from 'react-bootstrap/Container';
 
 const Page = ({ title, children }) => {
   return (
