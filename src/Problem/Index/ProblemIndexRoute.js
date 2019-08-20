@@ -1,13 +1,10 @@
 import React from 'react';
 import ProbleIndexDataProvider from 'Problem/Index/ProblemIndexDataProvider';
 import ProblemIndexPage from 'Problem/Index/ProblemIndexPage';
-
-const PATH = '/';
-
-export const getPath = () => PATH;
+import { PATH_INDEX } from 'Problem/paths';
 
 export default {
-  path: PATH,
+  path: PATH_INDEX,
   exact: true,
   main: () => (
     <ProbleIndexDataProvider>

@@ -1,14 +1,25 @@
 import PropTypes from 'prop-types';
+import { useQuery } from '@apollo/react-hooks';
+import ProblemDetailsQuery from 'Problem/Details/Connector/Apollo/ProblemDetailsQuery';
 
-const ProblemDetailsApolloConnector = ({ children }) =>
-  children({
-    loading: false,
-    id: 'a1',
-    title: 'aaa',
-    description: 'bbb',
+const ProblemDetailsApolloConnector = ({ id, children }) => {
+  const { data, loading } = useQuery(ProblemDetailsQuery, {
+    variables: { id },
   });
 
+  let result = {
+    loading,
+  };
+
+  if (data.problem) {
+    result = { ...result, ...data.problem };
+  }
+
+  return children(result);
+};
+
 ProblemDetailsApolloConnector.propTypes = {
+  id: PropTypes.string.isRequired,
   children: PropTypes.func.isRequired,
 };
 

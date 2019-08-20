@@ -2,10 +2,7 @@ import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import ProblemDetailsPage from 'Problem/Details/ProblemDetailsPage';
 import ProblemDetailsDataProvider from 'Problem/Details/ProblemDetailsDataProvider';
-
-const PATH = '/problem/:id';
-
-export const getPath = id => PATH.replace(':id', id);
+import { PATH_DETAILS } from 'Problem/paths';
 
 const ProblemDetailsRoute = ({
   match: {
@@ -22,7 +19,7 @@ ProblemDetailsRoute.propTypes = {
 };
 
 export default {
-  path: PATH,
+  path: PATH_DETAILS,
   exact: true,
   main: props => <ProblemDetailsRoute {...props} />,
 };
