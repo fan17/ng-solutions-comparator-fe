@@ -5,8 +5,11 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Page from 'Layout/Page';
 import paths from 'Problem/paths';
+import ProblemSolutionItem, {
+  ProblemSolutionItemPropTypes,
+} from 'Problem/Details/ProblemSolutionItem';
 
-const ProblemDetailsPage = ({ loading, title, description }) => (
+const ProblemDetailsPage = ({ loading, title, description, solutions }) => (
   <Page title="Problem Details">
     {loading ? (
       'loading...'
@@ -22,6 +25,11 @@ const ProblemDetailsPage = ({ loading, title, description }) => (
               <Card.Text>{description}</Card.Text>
             </Card.Body>
           </Card>
+          {solutions.map(solution => (
+            <div style={{ marginTop: '2rem' }} key={JSON.stringify(solution)}>
+              <ProblemSolutionItem {...solution} />
+            </div>
+          ))}
         </div>
       </>
     )}
@@ -32,6 +40,9 @@ ProblemDetailsPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
+  solutions: PropTypes.arrayOf(
+    PropTypes.shape(ProblemSolutionItemPropTypes.isRequired),
+  ).isRequired,
 };
 
 ProblemDetailsPage.defaultProps = {

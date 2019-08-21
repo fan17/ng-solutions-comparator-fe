@@ -12,7 +12,21 @@ const ProblemDetailsApolloConnector = ({ id, children }) => {
   };
 
   if (data.problem) {
-    result = { ...result, ...data.problem };
+    const problem = {
+      ...data.problem,
+      solutions: [
+        {
+          author: 'AJ',
+          meta: {
+            type: 'codepen',
+            user: 'andrzej-jdrzejczak',
+            hash: 'NVYXWg',
+          },
+        },
+      ],
+    };
+
+    result = { ...result, ...problem };
   }
 
   return children(result);
