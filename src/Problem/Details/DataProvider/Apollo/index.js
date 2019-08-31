@@ -16,20 +16,24 @@ const Apollo = ({ id, children }) => {
       ...data.problem,
       solutions: [
         {
+          id: 'cwew4f3wd3',
           author: 'AJ',
           meta: {
             type: 'codepen',
             user: 'andrzej-jdrzejczak',
             hash: 'NVYXWg',
           },
+          votesCount: 100,
         },
         {
+          id: 'asdad33d3',
           author: 'AJ',
           meta: {
             type: 'codepen',
             user: 'andrzej-jdrzejczak',
             hash: 'NVYXWg',
           },
+          votesCount: 0,
         },
       ],
     };

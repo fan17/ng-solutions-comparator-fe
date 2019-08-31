@@ -11,13 +11,13 @@ import SolutionItem, {
 
 const Page = ({ loading, title, description, solutions }) => (
   <LayoutPage title="Problem Details">
+    <Link to={paths.index()}>
+      <Button variant="primary">Go to list</Button>
+    </Link>
     {loading ? (
       'loading...'
     ) : (
       <>
-        <Link to={paths.index()}>
-          <Button variant="primary">Go to list</Button>
-        </Link>
         <div style={{ marginTop: '2rem' }}>
           <Card>
             <Card.Header>{title}</Card.Header>
@@ -25,9 +25,15 @@ const Page = ({ loading, title, description, solutions }) => (
               <Card.Text>{description}</Card.Text>
             </Card.Body>
           </Card>
+
           {solutions.map(solution => (
             <div style={{ marginTop: '2rem' }} key={JSON.stringify(solution)}>
-              <SolutionItem {...solution} />
+              <SolutionItem
+                {...solution}
+                voteFor={id => {
+                  console.log(`vote for ${id}`);
+                }}
+              />
             </div>
           ))}
         </div>
