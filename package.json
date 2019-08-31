@@ -15,7 +15,7 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-router-prop-types": "^1.0.4",
-    "react-scripts": "3.1.0"
+    "react-scripts": "3.1.1"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.2.0",

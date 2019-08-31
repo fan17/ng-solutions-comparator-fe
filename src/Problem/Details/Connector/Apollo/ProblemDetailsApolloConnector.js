@@ -23,6 +23,14 @@ const ProblemDetailsApolloConnector = ({ id, children }) => {
             hash: 'NVYXWg',
           },
         },
+        {
+          author: 'AJ',
+          meta: {
+            type: 'codepen',
+            user: 'andrzej-jdrzejczak',
+            hash: 'NVYXWg',
+          },
+        },
       ],
     };
 
