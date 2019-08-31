@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import paths from 'Problem/paths';
 
-const ProblemListItem = ({ id, title, description }) => (
+const Item = ({ id, title, description }) => (
   <Card>
     <Card.Header>{title}</Card.Header>
     <Card.Body>
@@ -17,12 +17,12 @@ const ProblemListItem = ({ id, title, description }) => (
   </Card>
 );
 
-export const ProblemListItemPropTypes = {
+export const ItemPropTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
 
-ProblemListItem.propTypes = ProblemListItemPropTypes;
+Item.propTypes = ItemPropTypes;
 
-export default ProblemListItem;
+export default Item;

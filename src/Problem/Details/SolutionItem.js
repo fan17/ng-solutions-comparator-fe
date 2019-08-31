@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Codepen from 'react-codepen-embed';
 import Card from 'react-bootstrap/Card';
 
-const ProblemSolutionItem = ({ author, meta: { hash, user } }) => {
+const SolutionItem = ({ author, meta: { hash, user } }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -21,7 +21,7 @@ const ProblemSolutionItem = ({ author, meta: { hash, user } }) => {
   );
 };
 
-export const ProblemSolutionItemPropTypes = {
+export const SolutionItemPropTypes = {
   author: PropTypes.string.isRequired,
   meta: PropTypes.shape({
     type: PropTypes.oneOf(['codepen']).isRequired,
@@ -29,6 +29,6 @@ export const ProblemSolutionItemPropTypes = {
     user: PropTypes.string.isRequired,
   }).isRequired,
 };
-ProblemSolutionItem.propTypes = ProblemSolutionItemPropTypes;
+SolutionItem.propTypes = SolutionItemPropTypes;
 
-export default ProblemSolutionItem;
+export default SolutionItem;

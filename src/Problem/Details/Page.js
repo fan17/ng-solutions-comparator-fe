@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import Page from 'Layout/Page';
+import LayoutPage from 'Layout/Page';
 import paths from 'Problem/paths';
-import ProblemSolutionItem, {
-  ProblemSolutionItemPropTypes,
-} from 'Problem/Details/ProblemSolutionItem';
+import SolutionItem, {
+  SolutionItemPropTypes,
+} from 'Problem/Details/SolutionItem';
 
-const ProblemDetailsPage = ({ loading, title, description, solutions }) => (
-  <Page title="Problem Details">
+const Page = ({ loading, title, description, solutions }) => (
+  <LayoutPage title="Problem Details">
     {loading ? (
       'loading...'
     ) : (
@@ -27,27 +27,27 @@ const ProblemDetailsPage = ({ loading, title, description, solutions }) => (
           </Card>
           {solutions.map(solution => (
             <div style={{ marginTop: '2rem' }} key={JSON.stringify(solution)}>
-              <ProblemSolutionItem {...solution} />
+              <SolutionItem {...solution} />
             </div>
           ))}
         </div>
       </>
     )}
-  </Page>
+  </LayoutPage>
 );
 
-ProblemDetailsPage.propTypes = {
+Page.propTypes = {
   loading: PropTypes.bool.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
   solutions: PropTypes.arrayOf(
-    PropTypes.shape(ProblemSolutionItemPropTypes.isRequired),
+    PropTypes.shape(SolutionItemPropTypes.isRequired),
   ).isRequired,
 };
 
-ProblemDetailsPage.defaultProps = {
+Page.defaultProps = {
   title: null,
   description: null,
 };
 
-export default ProblemDetailsPage;
+export default Page;
