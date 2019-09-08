@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Codepen from 'react-codepen-embed';
 import Card from 'react-bootstrap/Card';
+import Solution, { SolutionPropTypes } from 'Problem/Solution';
+import Clap from 'Layout/Clap';
 
-const SolutionItem = ({ author, meta: { hash, user } }) => {
+const SolutionItem = ({
+  id,
+  author: { name: authorName },
+  meta,
+  claps,
+  clap,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+  const totalClapsCount = claps.reduce(
+    (prev, { clapsCount }) => prev + clapsCount,
+    0,
+  );
+
+  const handleClap = event => {
+    event.stopPropagation();
+    clap(id);
+  };
+
   return (
     <Card>
-      <Card.Header onClick={toggle}>{author}</Card.Header>
+      <Card.Header onClick={toggle}>
+        {authorName}
+        <Clap clap={handleClap} count={totalClapsCount} />
+      </Card.Header>
       {isOpen ? (
         <Card.Body>
-          <Card.Text>
-            <Codepen hash={hash} user={user} />
-          </Card.Text>
+          <Solution {...meta} />
         </Card.Body>
       ) : null}
     </Card>
@@ -22,13 +40,26 @@ const SolutionItem = ({ author, meta: { hash, user } }) => {
 };
 
 export const SolutionItemPropTypes = {
-  author: PropTypes.string.isRequired,
-  meta: PropTypes.shape({
-    type: PropTypes.oneOf(['codepen']).isRequired,
-    hash: PropTypes.string.isRequired,
-    user: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
   }).isRequired,
+  meta: SolutionPropTypes,
+  claps: PropTypes.arrayOf(
+    PropTypes.shape({
+      clapsCount: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
+  clap: PropTypes.func.isRequired,
 };
 SolutionItem.propTypes = SolutionItemPropTypes;
+
+SolutionItem.defaultProps = {
+  meta: {
+    type: 'codepen',
+    hash: 'NVYXWg',
+    user: 'andrzej-jdrzejczak',
+  },
+};
 
 export default SolutionItem;

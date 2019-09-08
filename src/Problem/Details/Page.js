@@ -1,53 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import LayoutPage from 'Layout/Page';
 import paths from 'Problem/paths';
-import SolutionItem, {
-  SolutionItemPropTypes,
-} from 'Problem/Details/SolutionItem';
+import ProblemDetails from 'Problem/Details/ProblemDetails';
+import DataProvider from 'Problem/Details/DataProvider';
+import Loader from 'Layout/Loader';
+import SolutionItem from 'Problem/Details/SolutionItem';
+import ClapDataProvider from 'Problem/Solution/Clap/DataProvider';
 
-const Page = ({ loading, title, description, solutions }) => (
-  <LayoutPage title="Problem Details">
-    {loading ? (
-      'loading...'
-    ) : (
+const Page = ({ id }) => {
+  const renderSolutionItem = solution => (
+    <ClapDataProvider id={solution.id}>
+      {({ clap }) => <SolutionItem {...solution} clap={() => clap(id)} />}
+    </ClapDataProvider>
+  );
+
+  const Details = (
+    <DataProvider id={id}>
+      {({ loading, ...rest }) =>
+        loading ? (
+          <Loader />
+        ) : (
+          <ProblemDetails {...rest} renderSolutionItem={renderSolutionItem} />
+        )
+      }
+    </DataProvider>
+  );
+
+  return (
+    <LayoutPage title="Problem Details">
       <>
         <Link to={paths.index()}>
           <Button variant="primary">Go to list</Button>
         </Link>
-        <div style={{ marginTop: '2rem' }}>
-          <Card>
-            <Card.Header>{title}</Card.Header>
-            <Card.Body>
-              <Card.Text>{description}</Card.Text>
-            </Card.Body>
-          </Card>
-          {solutions.map(solution => (
-            <div style={{ marginTop: '2rem' }} key={JSON.stringify(solution)}>
-              <SolutionItem {...solution} />
-            </div>
-          ))}
-        </div>
+        <div style={{ marginTop: '2rem' }}>{Details}</div>
       </>
-    )}
-  </LayoutPage>
-);
-
-Page.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  solutions: PropTypes.arrayOf(
-    PropTypes.shape(SolutionItemPropTypes.isRequired),
-  ).isRequired,
+    </LayoutPage>
+  );
 };
 
-Page.defaultProps = {
-  title: null,
-  description: null,
+Page.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default Page;

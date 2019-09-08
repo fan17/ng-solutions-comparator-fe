@@ -1,22 +1,16 @@
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/react-hooks';
-import Query from 'Problem/Details/DataProvider/Apollo/Query';
+import { useMutation } from '@apollo/react-hooks';
+import Mutation from './Mutation';
 
 const Apollo = ({ id, children }) => {
-  const { data, loading } = useQuery(Query, {
+  const [clap, { loading }] = useMutation(Mutation, {
     variables: { id },
   });
 
-  let result = {
+  const result = {
     loading,
+    clap,
   };
-
-  if (data && data.problem) {
-    result = {
-      ...result,
-      ...data.problem,
-    };
-  }
 
   return children(result);
 };

@@ -6,6 +6,24 @@ const query = gql`
       id
       title
       description
+      author {
+        name
+      }
+      solutions {
+        id
+        title
+        description
+        link
+        author {
+          name
+        }
+        claps {
+          user {
+            name
+          }
+          clapsCount
+        }
+      }
     }
   }
 `;

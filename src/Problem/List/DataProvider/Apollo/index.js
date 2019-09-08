@@ -4,8 +4,7 @@ import Query from './Query';
 
 const Apollo = ({ children }) => {
   const { data, loading } = useQuery(Query);
-
-  return children({ loading, problems: data.problems || [] });
+  return children({ loading, problems: (data && data.problems) || [] });
 };
 
 Apollo.propTypes = {
