@@ -9,7 +9,9 @@ const Clap = ({ action, count }) => {
   };
   return (
     <div>
-      <Button onClick={handleClap}>Clap</Button>
+      <Button type="button" onClick={handleClap}>
+        Clap
+      </Button>
       {count} claps
     </div>
   );

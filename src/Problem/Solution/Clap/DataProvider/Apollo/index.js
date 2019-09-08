@@ -3,13 +3,13 @@ import { useMutation } from '@apollo/react-hooks';
 import Mutation from './Mutation';
 
 const Apollo = ({ id, children }) => {
-  const [voteFor, { loading }] = useMutation(Mutation, {
+  const [clap, { loading }] = useMutation(Mutation, {
     variables: { id },
   });
 
   const result = {
     loading,
-    voteFor,
+    clap,
   };
 
   return children(result);

@@ -15,12 +15,7 @@ const ProblemDetails = ({ title, description, solutions }) => (
     </Card>
     {solutions.map(solution => (
       <div style={{ marginTop: '2rem' }} key={solution.id}>
-        <SolutionItem
-          {...solution}
-          voteFor={id => {
-            console.log(`vote for ${id}`);
-          }}
-        />
+        <SolutionItem {...solution} />
       </div>
     ))}
   </>
