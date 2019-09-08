@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Item, { ItemPropTypes } from 'Problem/List/Item';
 
-const ProblemsList = ({ problems }) => (
+const ProblemsList = ({ problems, renderListItem }) => (
   <>
-    {problems.map(({ id, title, description }) => (
-      <div key={id} style={{ marginBottom: '2rem' }}>
-        <Item id={id} title={title} description={description} />
+    {problems.map(problem => (
+      <div key={problem.id} style={{ marginBottom: '2rem' }}>
+        {renderListItem(problem)}
       </div>
     ))}
   </>
 );
 
 ProblemsList.propTypes = {
-  problems: PropTypes.arrayOf(PropTypes.shape(ItemPropTypes).isRequired)
-    .isRequired,
+  problems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  renderListItem: PropTypes.func.isRequired,
 };
 export default ProblemsList;
