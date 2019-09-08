@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-import SolutionItem, {
-  SolutionItemPropTypes,
-} from 'Problem/Details/SolutionItem';
 
-const ProblemDetails = ({ title, description, solutions }) => (
+const ProblemDetails = ({
+  title,
+  description,
+  solutions,
+  renderSolutionItem,
+}) => (
   <>
     <Card>
       <Card.Header>{title}</Card.Header>
@@ -15,7 +17,7 @@ const ProblemDetails = ({ title, description, solutions }) => (
     </Card>
     {solutions.map(solution => (
       <div style={{ marginTop: '2rem' }} key={solution.id}>
-        <SolutionItem {...solution} />
+        {renderSolutionItem(solution)}
       </div>
     ))}
   </>
@@ -25,8 +27,11 @@ ProblemDetails.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   solutions: PropTypes.arrayOf(
-    PropTypes.shape(SolutionItemPropTypes.isRequired),
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
   ).isRequired,
+  renderSolutionItem: PropTypes.func.isRequired,
 };
 
 export default ProblemDetails;

@@ -14,7 +14,7 @@ const ProblemIndexPage = () => (
         ) : (
           <ProblemList
             problems={problems}
-            renderListItem={problem => <ProblemListItem {...problem} />}
+            renderItem={problem => <ProblemListItem {...problem} />}
           />
         )
       }

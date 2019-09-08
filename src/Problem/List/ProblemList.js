@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProblemsList = ({ problems, renderListItem }) => (
+const ProblemsList = ({ problems, renderItem }) => (
   <>
     {problems.map(problem => (
       <div key={problem.id} style={{ marginBottom: '2rem' }}>
-        {renderListItem(problem)}
+        {renderItem(problem)}
       </div>
     ))}
   </>
@@ -17,6 +17,6 @@ ProblemsList.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  renderListItem: PropTypes.func.isRequired,
+  renderItem: PropTypes.func.isRequired,
 };
 export default ProblemsList;

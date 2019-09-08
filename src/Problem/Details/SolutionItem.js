@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import Card from 'react-bootstrap/Card';
 import Solution, { SolutionPropTypes } from 'Problem/Solution';
-import ClapForSolution from 'Problem/Solution/Clap';
+import Clap from 'Layout/Clap';
 
-const SolutionItem = ({ id, author: { name: authorName }, meta, claps }) => {
+const SolutionItem = ({
+  id,
+  author: { name: authorName },
+  meta,
+  claps,
+  clap,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -14,11 +19,16 @@ const SolutionItem = ({ id, author: { name: authorName }, meta, claps }) => {
     0,
   );
 
+  const handleClap = event => {
+    event.stopPropagation();
+    clap(id);
+  };
+
   return (
     <Card>
       <Card.Header onClick={toggle}>
         {authorName}
-        <ClapForSolution id={id} count={totalClapsCount} />
+        <Clap clap={handleClap} count={totalClapsCount} />
       </Card.Header>
       {isOpen ? (
         <Card.Body>
@@ -40,6 +50,7 @@ export const SolutionItemPropTypes = {
       clapsCount: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  clap: PropTypes.func.isRequired,
 };
 SolutionItem.propTypes = SolutionItemPropTypes;
 
