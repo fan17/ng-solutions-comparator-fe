@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Header from 'Layout/Header';
 import Apollo from 'Apollo/Apollo';
-import { Main as ProblemIndexMainRoute } from 'Problem/Index/Route';
-import { Main as ProblemDetailsMainRoute } from 'Problem/Details/Route';
+import { ProblemIndexMainRoute } from 'Problem/List/Route';
+import { ProblemDetailsMainRoute } from 'Problem/Details/Route';
 
 const App = () => (
   <Apollo>

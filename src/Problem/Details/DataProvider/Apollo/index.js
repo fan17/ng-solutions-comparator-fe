@@ -11,34 +11,11 @@ const Apollo = ({ id, children }) => {
     loading,
   };
 
-  if (data.problem) {
-    const problem = {
+  if (data && data.problem) {
+    result = {
+      ...result,
       ...data.problem,
-      solutions: [
-        {
-          id: 'cwew4f3wd3',
-          author: 'AJ',
-          meta: {
-            type: 'codepen',
-            user: 'andrzej-jdrzejczak',
-            hash: 'NVYXWg',
-          },
-          votesCount: 100,
-        },
-        {
-          id: 'asdad33d3',
-          author: 'AJ',
-          meta: {
-            type: 'codepen',
-            user: 'andrzej-jdrzejczak',
-            hash: 'NVYXWg',
-          },
-          votesCount: 0,
-        },
-      ],
     };
-
-    result = { ...result, ...problem };
   }
 
   return children(result);
