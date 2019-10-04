@@ -4,9 +4,9 @@ import Info from './Info';
 
 const InfoContainer = () => {
   const {
-    user: { name, photo },
+    user: { name, imageUrl },
   } = useContext(AuthContext);
-  return <Info name={name} photo={photo} />;
+  return <Info name={name} photo={imageUrl} />;
 };
 
 export default InfoContainer;
