@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
+import AuthContext from 'Auth/Context';
 import Solution, { SolutionPropTypes } from 'Problem/Solution';
 import Clap from 'Layout/Clap';
 
@@ -11,6 +12,8 @@ const SolutionItem = ({
   claps,
   clap,
 }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -28,7 +31,11 @@ const SolutionItem = ({
     <Card>
       <Card.Header onClick={toggle}>
         {authorName}
-        <Clap clap={handleClap} count={totalClapsCount} />
+        <Clap
+          clap={handleClap}
+          count={totalClapsCount}
+          disabled={!isLoggedIn}
+        />
       </Card.Header>
       {isOpen ? (
         <Card.Body>
