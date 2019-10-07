@@ -15,11 +15,12 @@ const ProblemDetails = ({
         <Card.Text>{description}</Card.Text>
       </Card.Body>
     </Card>
-    {solutions.map(solution => (
-      <div style={{ marginTop: '2rem' }} key={solution.id}>
-        {renderSolutionItem(solution)}
-      </div>
-    ))}
+    {solutions &&
+      solutions.map(solution => (
+        <div style={{ marginTop: '2rem' }} key={solution.id}>
+          {renderSolutionItem(solution)}
+        </div>
+      ))}
   </>
 );
 
