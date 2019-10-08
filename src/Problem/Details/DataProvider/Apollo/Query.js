@@ -9,6 +9,13 @@ const query = gql`
       author {
         name
       }
+      comments {
+        id
+        author {
+          name
+        }
+        description
+      }
       solutions {
         id
         title
@@ -22,6 +29,13 @@ const query = gql`
             name
           }
           clapsCount
+        }
+        comments {
+          id
+          author {
+            name
+          }
+          description
         }
       }
     }

@@ -2,8 +2,9 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import AuthContext from 'Auth/Context';
-import Solution, { SolutionPropTypes } from 'Problem/Solution';
+import Solution, { SolutionPropTypes } from 'Solution/SolutionCode';
 import Clap from 'Layout/Clap';
+import useCommentsVisibility from 'Comment/useCommentsVisibilityHook';
 
 const SolutionItem = ({
   id,
@@ -11,7 +12,14 @@ const SolutionItem = ({
   meta,
   claps,
   clap,
+  comments,
+  renderComment,
 }) => {
+  const {
+    comments: commentsFromHook,
+    button: toogleCommentButton,
+  } = useCommentsVisibility(comments);
+
   const { isLoggedIn } = useContext(AuthContext);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +48,12 @@ const SolutionItem = ({
       {isOpen ? (
         <Card.Body>
           <Solution {...meta} />
+          {toogleCommentButton}
+          {commentsFromHook.map(comment => (
+            <div style={{ marginTop: '2rem' }} key={comment.id}>
+              {renderComment(comment)}
+            </div>
+          ))}
         </Card.Body>
       ) : null}
     </Card>
@@ -58,6 +72,12 @@ export const SolutionItemPropTypes = {
     }).isRequired,
   ).isRequired,
   clap: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  renderComment: PropTypes.func.isRequired,
 };
 SolutionItem.propTypes = SolutionItemPropTypes;
 

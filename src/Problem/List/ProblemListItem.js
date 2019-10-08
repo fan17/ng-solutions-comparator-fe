@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import paths from 'Problem/paths';
 import { CommentPropTypes } from 'Comment/Comment';
+import useCommentsVisibility from 'Comment/useCommentsVisibilityHook';
 
 const Item = ({ id, title, description, comments, renderComment }) => {
-  const [commentsAreVisible, setCommentsVisibility] = useState(false);
-  const showComments = () => setCommentsVisibility(true);
-  const hideComments = () => setCommentsVisibility(false);
+  const {
+    comments: commentsFromHook,
+    button: toogleCommentButton,
+  } = useCommentsVisibility(comments);
 
   return (
     <Card>
@@ -19,19 +21,12 @@ const Item = ({ id, title, description, comments, renderComment }) => {
         <Link to={paths.details(id)}>
           <Button variant="primary">Go to details</Button>
         </Link>
-        {comments && !commentsAreVisible && (
-          <Button variant="outline-dark" onClick={showComments}>
-            Show comments ({comments.length})
-          </Button>
-        )}
-        {comments && commentsAreVisible && (
-          <>
-            <Button variant="outline-dark" onClick={hideComments}>
-              Hide comments
-            </Button>
-            {comments.map(comment => renderComment(comment))}
-          </>
-        )}
+        {toogleCommentButton}
+        {commentsFromHook.map(comment => (
+          <div style={{ marginTop: '2rem' }} key={comment.id}>
+            {renderComment(comment)}
+          </div>
+        ))}
       </Card.Body>
     </Card>
   );

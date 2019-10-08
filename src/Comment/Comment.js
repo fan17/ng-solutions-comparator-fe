@@ -6,10 +6,10 @@ const Comment = ({ id, author: { name: authorName }, description }) => (
   <>
     <Card>
       <Card.Header>
-        #{id} {authorName}
+        #{id} name: {authorName}
       </Card.Header>
       <Card.Body>
-        <Card.Text>{description}</Card.Text>
+        <Card.Text>description: {description}</Card.Text>
       </Card.Body>
     </Card>
   </>
