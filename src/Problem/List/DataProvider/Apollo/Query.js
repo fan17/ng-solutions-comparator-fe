@@ -6,6 +6,13 @@ const query = gql`
       id
       title
       description
+      comments {
+        id
+        author {
+          name
+        }
+        description
+      }
     }
   }
 `;
