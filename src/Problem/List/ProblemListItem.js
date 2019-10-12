@@ -12,8 +12,8 @@ import useCommentProblem from 'Problem/Comment/DataProvider/Apollo';
 const Item = ({ id, title, description, comments, renderComment }) => {
   const {
     commentProblem,
-    loading: addingInProgress,
-    error: addingError,
+    loading: addingCommentInProgress,
+    error: addingCommentError,
   } = useCommentProblem();
   const {
     comments: commentsFromHook,
@@ -23,8 +23,8 @@ const Item = ({ id, title, description, comments, renderComment }) => {
   } = useComments({
     comments,
     onAdd: commentProblem(id),
-    addingInProgress,
-    addingError,
+    addingCommentInProgress,
+    addingCommentError,
   });
   const { isLoggedIn } = useContext(AuthContext);
 

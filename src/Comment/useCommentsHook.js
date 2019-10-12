@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import NewComment from './NewComment';
 
-const useComments = ({ comments, onAdd, addingInProgress, addingError }) => {
+const useComments = ({
+  comments,
+  onAdd,
+  addingCommentInProgress,
+  addingCommentError,
+}) => {
   const [visible, setVisibility] = useState(false);
   const show = () => setVisibility(true);
   const hide = () => setVisibility(false);
@@ -26,8 +31,8 @@ const useComments = ({ comments, onAdd, addingInProgress, addingError }) => {
   const newOne = (
     <NewComment
       onAdd={onAdd}
-      loading={addingInProgress}
-      error={Boolean(addingError)}
+      loading={addingCommentInProgress}
+      error={Boolean(addingCommentError)}
     />
   );
 

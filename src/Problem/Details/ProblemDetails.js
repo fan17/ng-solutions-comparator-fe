@@ -16,8 +16,8 @@ const ProblemDetails = ({
 }) => {
   const {
     commentProblem,
-    loading: addingInProgress,
-    error: addingError,
+    loading: addingCommentInProgress,
+    error: addingCommentError,
   } = useCommentProblem();
   const {
     comments: commentsFromHook,
@@ -27,8 +27,8 @@ const ProblemDetails = ({
   } = useComments({
     comments,
     onAdd: commentProblem(id),
-    addingInProgress,
-    addingError,
+    addingCommentInProgress,
+    addingCommentError,
   });
   const { isLoggedIn } = useContext(AuthContext);
   return (
