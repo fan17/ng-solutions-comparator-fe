@@ -5,6 +5,7 @@ import AuthContext from 'Auth/Context';
 import Solution, { SolutionPropTypes } from 'Solution/SolutionCode';
 import Clap from 'Layout/Clap';
 import useComments from 'Comment/useCommentsHook';
+import useCommentSolution from './Comment/DataProvider';
 
 const SolutionItem = ({
   id,
@@ -16,10 +17,21 @@ const SolutionItem = ({
   renderComment,
 }) => {
   const {
+    commentSolution,
+    loading: addingCommentInProgress,
+    error: addingCommentError,
+  } = useCommentSolution();
+  const {
     comments: commentsFromHook,
     button: toogleCommentButton,
     visible: areCommentsVisible,
-  } = useComments({ comments, onAdd: () => {} });
+    newOne: newCommentItem,
+  } = useComments({
+    comments,
+    onAdd: commentSolution(id),
+    addingCommentInProgress,
+    addingCommentError,
+  });
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -50,7 +62,9 @@ const SolutionItem = ({
         <Card.Body>
           <Solution {...meta} />
           {toogleCommentButton}
-          {areCommentsVisible && <div>adasd</div>}
+          {isLoggedIn && areCommentsVisible && (
+            <div style={{ marginTop: '2rem' }}>{newCommentItem}</div>
+          )}
           {areCommentsVisible &&
             commentsFromHook.map(comment => (
               <div style={{ marginTop: '2rem' }} key={comment.id}>
