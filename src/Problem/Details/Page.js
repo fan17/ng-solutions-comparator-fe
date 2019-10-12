@@ -36,32 +36,31 @@ const Page = ({ id }) => {
     </ClapDataProvider>
   );
 
-  const Details = (
-    <DataProvider id={id}>
-      {({ loading, title, description, comments, solutions }) =>
-        loading ? (
-          <Loader />
-        ) : (
-          <ProblemDetails
-            title={title}
-            description={description}
-            comments={comments}
-            renderComment={renderComment}
-            solutions={solutions}
-            renderSolutionItem={renderSolutionItem}
-          />
-        )
-      }
-    </DataProvider>
-  );
-
   return (
     <LayoutPage title="Problem Details">
       <>
         <Link to={paths.index()}>
           <Button variant="primary">Go to list</Button>
         </Link>
-        <div style={{ marginTop: '2rem' }}>{Details}</div>
+        <div style={{ marginTop: '2rem' }}>
+          <DataProvider id={id}>
+            {({ loading, title, description, comments, solutions }) =>
+              loading ? (
+                <Loader />
+              ) : (
+                <ProblemDetails
+                  id={id}
+                  title={title}
+                  description={description}
+                  comments={comments}
+                  renderComment={renderComment}
+                  solutions={solutions}
+                  renderSolutionItem={renderSolutionItem}
+                />
+              )
+            }
+          </DataProvider>
+        </div>
       </>
     </LayoutPage>
   );
