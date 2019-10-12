@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import AuthContext from 'Auth/Context';
 import Solution, { SolutionPropTypes } from 'Solution/SolutionCode';
 import Clap from 'Layout/Clap';
-import useCommentsVisibility from 'Comment/useCommentsVisibilityHook';
+import useComments from 'Comment/useCommentsHook';
 
 const SolutionItem = ({
   id,
@@ -18,7 +18,8 @@ const SolutionItem = ({
   const {
     comments: commentsFromHook,
     button: toogleCommentButton,
-  } = useCommentsVisibility(comments);
+    visible: areCommentsVisible,
+  } = useComments({ comments, onAdd: () => {} });
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -49,11 +50,13 @@ const SolutionItem = ({
         <Card.Body>
           <Solution {...meta} />
           {toogleCommentButton}
-          {commentsFromHook.map(comment => (
-            <div style={{ marginTop: '2rem' }} key={comment.id}>
-              {renderComment(comment)}
-            </div>
-          ))}
+          {areCommentsVisible && <div>adasd</div>}
+          {areCommentsVisible &&
+            commentsFromHook.map(comment => (
+              <div style={{ marginTop: '2rem' }} key={comment.id}>
+                {renderComment(comment)}
+              </div>
+            ))}
         </Card.Body>
       ) : null}
     </Card>

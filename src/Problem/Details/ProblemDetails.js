@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-import useCommentsVisibility from 'Comment/useCommentsVisibilityHook';
+import AuthContext from 'Auth/Context';
+import useComments from 'Comment/useCommentsHook';
+import useCommentProblem from 'Problem/Comment/DataProvider';
 
 const ProblemDetails = ({
+  id,
   title,
   description,
   comments,
@@ -12,9 +15,22 @@ const ProblemDetails = ({
   renderSolutionItem,
 }) => {
   const {
+    commentProblem,
+    loading: addingInProgress,
+    error: addingError,
+  } = useCommentProblem();
+  const {
     comments: commentsFromHook,
     button: toogleCommentButton,
-  } = useCommentsVisibility(comments);
+    visible: areCommentsVisible,
+    newOne: newCommentItem,
+  } = useComments({
+    comments,
+    onAdd: commentProblem(id),
+    addingInProgress,
+    addingError,
+  });
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <>
       <Card>
@@ -22,11 +38,15 @@ const ProblemDetails = ({
         <Card.Body>
           <Card.Text>{description}</Card.Text>
           {toogleCommentButton}
-          {commentsFromHook.map(comment => (
-            <div style={{ marginTop: '2rem' }} key={comment.id}>
-              {renderComment(comment)}
-            </div>
-          ))}
+          {isLoggedIn && areCommentsVisible && (
+            <div style={{ marginTop: '2rem' }}>{newCommentItem}</div>
+          )}
+          {areCommentsVisible &&
+            commentsFromHook.map(comment => (
+              <div style={{ marginTop: '2rem' }} key={comment.id}>
+                {renderComment(comment)}
+              </div>
+            ))}
         </Card.Body>
       </Card>
       {solutions &&
@@ -40,6 +60,7 @@ const ProblemDetails = ({
 };
 
 ProblemDetails.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   solutions: PropTypes.arrayOf(
